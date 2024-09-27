@@ -3,7 +3,7 @@ import categoryModel from "../models/categoryModel.js";
 class CategoryController{
     static  getAllCategories = async (req, res)=>{
        try {
-            const fetchAllCategories= await categoryModel.find({});
+            const fetchAllCategories= await categoryModel.find({}); // finding all the categories
             return res
                 .status(200)
                 .json(fetchAllCategories);
