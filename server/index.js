@@ -13,6 +13,7 @@ connectToMongo();
 app.use(cors());
 app.use(express.json());
 
+app.use(express.static("public/upload"))
 // for testing purpose only
 app.get("/",(req, res)=>{
     res
