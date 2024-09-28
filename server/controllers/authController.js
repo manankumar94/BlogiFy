@@ -1,7 +1,9 @@
 import bcryptjs from "bcryptjs";
 import authModel from "../models/authModel.js";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv"; 
 
+dotenv.config();
 
 class AuthController{
     static userRegistration = async (req, res)=>{
@@ -57,11 +59,11 @@ class AuthController{
                 if(isEmail){
                     if(isEmail.email=== email && await bcryptjs.compare(password, isEmail.password) ){
                         // token generate
-                        const token= jwt.sign(
-                            {userID: isEmail._id},   // through payload
-                             "secretKey", 
-                             {expiresIn: "2d"},
-                            );
+                        const token = jwt.sign(
+                            { userID: isEmail._id },   // Payload
+                            process.env.SECRET_KEY,    
+                            { expiresIn: "2d" },
+                        );
                         
                         return res
                                 .status(200)

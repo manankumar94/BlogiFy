@@ -2,29 +2,30 @@ import express from "express";
 import cors from "cors";
 import connectToMongo from "./config/db.js";
 import router from "./routes/blog.js";
+import dotenv from "dotenv"; 
 
-const app= express();
+const app = express();
+dotenv.config(); 
 
-const PORT=9000;
+
+const PORT = process.env.PORT || 9000; 
 
 connectToMongo();
 
-// middlewares
+// Middlewares
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public/upload"));
 
-app.use(express.static("public/upload"))
-// for testing purpose only
-app.get("/",(req, res)=>{
-    res
-     .status(200)
-     .send("For testing Purpose Only");
-})
+// For testing purpose only
+app.get("/", (req, res) => {
+    res.status(200).send("For testing Purpose Only");
+});
 
 // API Routes
 app.use("/api", router);
 
-app.listen(PORT, (err)=>{
-    if(err) console.log(err);
+app.listen(PORT, (err) => {
+    if (err) console.log(err);
     else console.log(`Server is Running on PORT ${PORT}`);
-})
+});
