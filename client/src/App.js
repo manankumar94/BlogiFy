@@ -1,5 +1,7 @@
 import React from 'react'
 import {Route, Routes} from "react-router-dom";
+
+// Importing Required Components 
 import Header from './Components/Header.js';
 import Home from './Pages/Home.js';
 import Login from './Pages/Login.js';
